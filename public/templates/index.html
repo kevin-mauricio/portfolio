@@ -23,6 +23,26 @@
 	<link rel="stylesheet" href="{{url_for('static', path='css/icomoon.css')}}">
 	<link rel="stylesheet" href="{{url_for('static', path='css/style.css')}}">
 	<link rel="shortcut icon" href="{{url_for('static', path='/images/icon.svg')}}">
+	<style>
+		.contenedor {
+			height: 100vh;
+		}
+		  
+		  @media (max-width: 992px) {
+			.texto {
+				position: relative;
+				text-align: center;
+			}
+
+			.imagen	{
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				width: fit-content;
+			}
+		  }
+	</style>
 
 </head>
 
@@ -53,27 +73,21 @@
 			</div>
 		</div>
 	</nav>
-	
-	<section id="home-section" class="hero">
-		<div class="home-slider owl-carousel">
-			<div class="slider-item mt-0">
-				<div class="container">
-					<div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
-						data-scrollax-parent="true">
-						<div class="one-third js-fullheight d-flex align-items-center justify-content-center">
-							<img class="" src="{{url_for('static', path='/images/animacion.gif')}}" alt="">
-						</div>
-						<div class="one-forth d-flex align-items-center ftco-animate"
-							data-scrollax=" properties: { translateY: '70%' }">
-							<div class="text">
-								<h1 class="mb-4 mt-3">Hola, soy <span>Kevin.</span> Desarrollador de Software.</h1>
-								<h2 class="mb-4">Bienvenido a mi portafolio</h2>
-							</div>
-						</div>
+
+	<!-- HOME SECTION -->
+	<section id="home-section" class="hero">			
+		<div class="container d-flex align-items-center contenedor">
+			<div class="row align-items-center">
+				<div class="col imagen">
+					<img src="{{url_for('static', path='/images/animacion.gif')}}" alt="">
+				</div>
+				<div class="col ftco-animate texto">
+					<div class="text">
+						<h1 class="mb-4 mt-3 font-weight-bold">Hola, soy <span class="text-primary">Kevin.</span> Desarrollador de Software.</h1>
+						<h2 class="mb-4 font-weight-bold">Bienvenido a mi portafolio</h2>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 
@@ -81,15 +95,15 @@
 		<div class="container">
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-12 heading-section text-center ftco-animate">
-					<h1 class="big big-2">Projects</h1>
-					<h2 class="mb-4">Projects</h2>
-					<p class="">Some project </p>
+					<h1 class="big big-2">Proyectos</h1>
+					<h2 class="mb-4">Proyectos</h2>
+					<p class="">Algunos proyectos que he desarrollado</p>
 				</div>
 			</div>
 			<div class="row mt-5">
 				<div class="col-md-4">
 					<div class="project img ftco-animate d-flex justify-content-center align-items-center"
-						style="background-image: url('{{ url_for('static', path='images/project-1.jpg') }}')">
+						style="background-image: url('{{ url_for('static', path='images/project-portfolio.jpg') }}')">
 						<div class="overlay"></div>
 						<div class="text text-center p-4">
 							<h3><a href="#">Branding &amp; Illustration Design</a></h3>
