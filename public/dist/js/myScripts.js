@@ -21,14 +21,21 @@ formulario.addEventListener('submit', function (event) {
             return Swal.fire({
                 icon: 'success',
                 title: 'Formulario enviado con éxito',
-                text: 'Gracias por tu envío.',
+                text: 'Gracias por tu mensaje.',
             });
         } else if (status === 400) {
-            // Error de validación - Muestra la alerta de error de validación
+            // Error de validación - datos_vacios
             return Swal.fire({
                 icon: 'error',
-                title: 'Ups',
+                title: 'Datos vacios',
                 text: 'Todos los datos son necesarios para una mejor respuesta.',
+            });
+        } else if (status === 401) {
+            // Error de validación - correo_invalido
+            return Swal.fire({
+                icon: 'error',
+                title: 'Correo inválido',
+                text: 'Por favor asegurate de ingresar un correo válido.',
             });
         } else {
             // Otro código de estado - Muestra una alerta genérica

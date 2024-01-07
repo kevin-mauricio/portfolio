@@ -1,9 +1,12 @@
-from fastapi import FastAPI, Form, HTTPException, Request
+from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from Correo import enviarCorreoCliente, enviarmeNotificacion
+from database import get_database
+from sqlalchemy.orm import Session
 
-from funciones import validarFormulario
+from funciones import insertarMensaje, validarFormulario
 
 app = FastAPI()
 
@@ -25,17 +28,31 @@ def enviarCorreo(
     correo: str = Form(""),
     asunto: str = Form(""),
     mensaje: str = Form(""),
+    db: Session = Depends(get_database)
 ):
     datos = {"nombres": nombres, "correo": correo, "asunto": asunto, "mensaje": mensaje}
 
     #validar el formulario
     is_valid = validarFormulario(datos)
-    if is_valid:
+
+    status = is_valid.get("status")
+    tipo = is_valid.get("tipo")
+
+    if status:
         response = template.TemplateResponse("index.html", {"request": request}, status_code=200)
+        insertarMensaje(datos, db)
+        enviarCorreoCliente(datos=datos)
+        enviarmeNotificacion(datos=datos)
     else:
-        response = template.TemplateResponse("index.html", {"request": request}, status_code=400)
-    
+        if tipo == "datos_vacios":
+            response = template.TemplateResponse("index.html", {"request": request}, status_code=400)
+        else:
+            #correo invalido
+            response = template.TemplateResponse("index.html", {"request": request}, status_code=401)
+
     return response
+
+
 
 @app.get("/json")
 def obtener_json():
