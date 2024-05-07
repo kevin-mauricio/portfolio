@@ -54,10 +54,11 @@ def enviarCorreo(
 
 
 
-@app.get("/json")
+""" @app.get("/json")
 def obtener_json():
     # Puedes construir el contenido JSON como un diccionario de Python
     contenido_json = {"mensaje": "Hola, este es un JSON"}
 
     # Luego, lo devuelves utilizando JSONResponse
     return JSONResponse(content=contenido_json)
+ """
